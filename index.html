@@ -1,0 +1,97 @@
+<html>
+<head>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+
+
+
+
+
+<div id="siemano" onclick="add()" ></div>
+
+<div id="hajs">Hajs: 0</div>
+<div id="ulep" onclick="increaseClick()">Click: 1<br>Cost: 10</div>
+<div id="ulepovt" onclick="increaseOvertime()">Overtime: 0/s<br>Cost: 10</div>
+<button onclick="okno()">klik</button>
+<div id="okno"></div>
+<div id="myProgress">
+	<div id="myBar"></div>
+</div>
+
+
+	<script>
+
+		var hajs=0;
+		var click=10; //dalem 10 zeby szybciej sprawdzac pasek :V
+		var clickm=10;
+		var overtime=0;
+		var overtimem=10;
+		var siemano = document.getElementById("siemano");
+		var t;
+
+		function add(){
+
+			hajs=hajs+click;
+			document.getElementById("hajs").innerHTML="Hajs: "+hajs;
+		}
+
+		function increaseClick(){
+			if(hajs>=clickm){
+				hajs=hajs-clickm;
+				click++;
+				clickm=Math.floor(clickm*1.33);
+				document.getElementById("ulep").innerHTML="Click: "+click+"<br>Cost: "+clickm;
+				document.getElementById("hajs").innerHTML="Hajs: "+hajs;
+			}
+		}
+
+//funkcja animacji paska postepu
+		function move() {
+  var elem = document.getElementById("myBar");
+  var width = 1;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+    } else {
+      width++;
+      elem.style.width = width + 1;
+    }
+  }
+}
+
+
+		function hajsOvertime(){
+			if(overtime>=1) move();
+			hajs=hajs+overtime;
+			document.getElementById("hajs").innerHTML="Hajs: "+hajs;
+		}
+
+		function increaseOvertime(){
+			if(hajs>=overtimem){
+				hajs=hajs-overtimem;
+				overtime++;
+				overtimem=Math.floor(overtimem*1.33);
+				document.getElementById("ulepovt").innerHTML="Overtime: "+overtime+"/s<br>Cost: "+overtimem;
+				document.getElementById("hajs").innerHTML="Hajs: "+hajs;
+			}
+		}
+
+		window.setInterval(hajsOvertime, 1000);
+
+
+		function okno(){
+			document.getElementById("okno").classList.toggle("widoczne");
+		}
+
+
+
+
+
+	</script>
+
+</body>
+</html>
